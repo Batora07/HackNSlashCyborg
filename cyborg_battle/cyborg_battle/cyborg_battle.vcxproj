@@ -122,19 +122,35 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="animation.cpp" />
+    <ClCompile Include="animationSet.cpp" />
     <ClCompile Include="cleanup.cpp" />
     <ClCompile Include="drawing_functions.cpp" />
+    <ClCompile Include="frame.cpp" />
     <ClCompile Include="globals.cpp" />
+    <ClCompile Include="groupBuilder.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="randomNumber.cpp" />
     <ClCompile Include="res_path.cpp" />
+    <ClCompile Include="timeController.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="animation.h" />
+    <ClInclude Include="animationSet.h" />
     <ClInclude Include="cleanup.h" />
+    <ClInclude Include="dataGroupType.h" />
     <ClInclude Include="drawing_functions.h" />
+    <ClInclude Include="frame.h" />
     <ClInclude Include="globals.h" />
+    <ClInclude Include="group.h" />
+    <ClInclude Include="groupBox.h" />
+    <ClInclude Include="groupBuilder.h" />
+    <ClInclude Include="groupNumber.h" />
+    <ClInclude Include="groupPosition.h" />
+    <ClInclude Include="groupString.h" />
     <ClInclude Include="randomNumber.h" />
     <ClInclude Include="res_path.h" />
+    <ClInclude Include="timeController.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
