@@ -17,7 +17,7 @@ public:
 	int getEndFrameNumber(int frameNumber); //returns the last frame number
 	Frame* getFrame(int frameNumber); // get frame using frame number
 
-	// TODO loadAnimation
+	void loadAnimation(ifstream &file, list<DataGroupType> &groupTypes);
 };
 
 #endif

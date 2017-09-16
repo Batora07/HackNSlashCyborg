@@ -18,7 +18,7 @@ public:
 
 	Animation* getAnimation(string name);
 
-	//TODO loadAnimationSet
+	void loadAnimationSet(string fileName, list<DataGroupType> &groupTypes, bool setColourKey = false, int transparentPixelIndex = 0, bool createWhiteTexture = false);
 
 };
 

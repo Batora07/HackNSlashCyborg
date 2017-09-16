@@ -6,6 +6,8 @@
 #include <SDL.h>
 #include "randomNumber.h"
 
+using namespace std;
+
 class Globals {
 public :
 	// math helpers
@@ -16,6 +18,9 @@ public :
 	// SDL related
 	static int ScreenWidth, ScreenHeight, ScreenScale;
 	static SDL_Renderer *renderer;
+
+	//clips off header e.g : "clip: 50 114 44 49" turns into "50 114 44 49" 
+	static string clipOffDataHeader(string data);
 };
 
 #endif

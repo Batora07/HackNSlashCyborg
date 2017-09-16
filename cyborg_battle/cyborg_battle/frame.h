@@ -23,7 +23,7 @@ public:
 
 	void Draw(SDL_Texture* spriteSheet, float x, float y);
 
-	// TODO loadframe
+	void loadFrame(ifstream &file, list<DataGroupType> &groupTypes);
 };
 
 #endif
