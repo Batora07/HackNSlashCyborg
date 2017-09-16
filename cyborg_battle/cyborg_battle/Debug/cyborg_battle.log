@@ -1,3 +1,8 @@
-﻿  main.cpp
+﻿  res_path.cpp
+  main.cpp
+  globals.cpp
+d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\globals.cpp(3): warning C4305: 'initializing': truncation from 'double' to 'float'
+  drawing_functions.cpp
+  Generating Code...
   cyborg_battle.vcxproj -> D:\GameDev\cppProjects\cyborg_battle\Debug\cyborg_battle.exe
   cyborg_battle.vcxproj -> D:\GameDev\cppProjects\cyborg_battle\Debug\cyborg_battle.pdb (Partial PDB)

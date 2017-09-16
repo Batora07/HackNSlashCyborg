@@ -2,6 +2,7 @@
 #include "res_path.h"
 #include "drawing_functions.h"
 #include "SDL_mixer.h"
+#include "globals.h"
 
 int main(int argc, char **argv) {
 
@@ -12,7 +13,7 @@ int main(int argc, char **argv) {
 	}
 
 	// setup window
-	SDL_Window *window = SDL_CreateWindow("Cyborg Battle", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 648, 352, SDL_WINDOW_SHOWN);
+	SDL_Window *window = SDL_CreateWindow("Cyborg Battle", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, Globals::ScreenWidth*Globals::ScreenScale, Globals::ScreenHeight*Globals::ScreenScale, SDL_WINDOW_SHOWN);
 	if (window == nullptr) {
 		SDL_Quit();
 		cout << "window error" << endl;
@@ -20,8 +21,8 @@ int main(int argc, char **argv) {
 	}
 
 	// setup renderer
-	SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-	if (renderer == nullptr) {
+	Globals::renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+	if (Globals::renderer == nullptr) {
 		cleanup(window);
 		SDL_Quit();
 		cout << "renderer error" << endl;
@@ -29,7 +30,7 @@ int main(int argc, char **argv) {
 	}
 
 	// This is the size to draw things at, before we scale it to the screen size dimensions mentionned in createwindow
-	SDL_RenderSetLogicalSize(renderer, 640, 352);
+	SDL_RenderSetLogicalSize(Globals::renderer, Globals::ScreenWidth, Globals::ScreenHeight);
 
 	// initialize sdl_image
 	if ((IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG) != IMG_INIT_PNG) {
@@ -54,19 +55,19 @@ int main(int argc, char **argv) {
 
 	// load up a texture to drawn
 	string resPath = getResourcePath();
-	SDL_Texture *texture = loadTexture(resPath + "map.png", renderer);
+	SDL_Texture *texture = loadTexture(resPath + "map.png", Globals::renderer);
 
 	// run game for 5000 ticks (5000ms)
 	while (SDL_GetTicks() < 5000) {
 		// clear the screen
-		SDL_RenderClear(renderer);
+		SDL_RenderClear(Globals::renderer);
 		// draw what we want to the screen
-		renderTexture(texture, renderer, 0, 0);
+		renderTexture(texture, Globals::renderer, 0, 0);
 		// show image we've been rendering
-		SDL_RenderPresent(renderer);
+		SDL_RenderPresent(Globals::renderer);
 	}
 
-	cleanup(renderer);
+	cleanup(Globals::renderer);
 	cleanup(window);
 	cleanup(texture);
 
