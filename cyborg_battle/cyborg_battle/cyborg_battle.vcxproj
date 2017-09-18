@@ -140,6 +140,7 @@
     <ClInclude Include="cleanup.h" />
     <ClInclude Include="dataGroupType.h" />
     <ClInclude Include="drawing_functions.h" />
+    <ClInclude Include="entity.h" />
     <ClInclude Include="frame.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="group.h" />
