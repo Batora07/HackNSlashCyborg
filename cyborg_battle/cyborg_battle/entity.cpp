@@ -10,7 +10,7 @@ void Entity::draw() {
 	if (currentFrame != NULL && active) {
 		currentFrame->Draw(animSet->spriteSheet, x, y);
 	}
-	// draw collision box
+	// draw collision box if debug activate
 	if (solid && Globals::debugging) {
 		// sets the current drawing color, doesn't affect textures
 		SDL_SetRenderDrawColor(Globals::renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
@@ -84,10 +84,102 @@ void Entity::updateMovement() {
 	SDL_UnionRect(&collisionBox, &lastCollisionBox, &collisionBox);
 }
 
-void updateCollisionBox();
+void Entity::updateCollisionBox() {
+	collisionBox.x = x - collisionBox.w / 2;
+	collisionBox.y = y + collisionBoxYOffset;
+	collisionBox.w = collisionBoxW;
+	collisionBox.h = collisionBoxH;
+}
+
+void Entity::updateCollisions() {
+	if (active && collidedWithSolids && (moveSpeed > 0 || slideAmount > 0)) {
+		// list of potential collisions
+		list<Entity*> collisions;
+
+		for (auto entity = Entity::entities.begin(); entity != Entity::entities.end(); entity++) {
+			// if we collide with this entity with our currently unioned collisionbox, add to list
+			if ((*entity)->active
+				&& (*entity)->type != this->type 
+				&& (*entity)->solid 
+				&& Entity::checkCollision(collisionBox, (*entity)->collisionBox)) {
+				//add it to the list
+				collisions.push_back(*entity);
+			}
+		}
+		// if we have a list of potential entities we may hit, then lets check them properly to do collision resolution
+		if (collisions.size() > 0) {
+			updateCollisionBox();
+
+			// multisample check for collisions from where we started to where we are planning to go to
+
+			// first we are going to find the sample distance we should travel between checks
+			float boxTravelSize = 0;
+			if (collisionBox.w < collisionBox.h)
+				boxTravelSize = collisionBox.w / 4;
+			else
+				boxTravelSize = collisionBox.h / 4;
+
+			// use sample box to check for collisions from start point to end point, moving at boxTravelSize each sample
+			SDL_Rect sampleBox = lastCollisionBox;
+			float movementAngle = Entity::angleBetweenTwoRects(lastCollisionBox, collisionBox);
+
+			bool foundCollision = false;
+			while (!foundCollision) {
+				// check sample box for collisions where it is now
+				SDL_Rect intersection;
+				for (auto entity = collisions.begin(); entity != collisions.end(); entity++) {
+					if (SDL_IntersectRect(&sampleBox, &(*entity)->collisionBox, &intersection)) {
+						// there is a collision
+						foundCollision = true;
+						moveSpeed = 0;
+						moving = false;
+						slideAngle = angleBetweenTwoEntities((*entity), this);
+						// currently intersecting a entity, now we need to do collision resolution
+						if (intersection.w < intersection.h) {
+							if (lastCollisionBox.x + lastCollisionBox.w / 2 < (*entity)->collisionBox.w / 2)
+								sampleBox.x -= intersection.w; // started on left so move left out of collision
+							else
+								sampleBox.x += intersection.w; // otherwise, started on right
+						}
+						else {
+							if (lastCollisionBox.y + lastCollisionBox.h / 2 < (*entity)->collisionBox.y + (*entity)->collisionBox.h / 2)
+								sampleBox.y -= intersection.h; // started above so move out of collision
+							else
+								sampleBox.y += intersection.h; // otherwise started below
+						}
+					}
+				}
+
+				// if collisions found or sample box is at same place as collision box, exit loop
+				if (foundCollision || (sampleBox.x == collisionBox.x && sampleBox.y == collisionBox.y))
+					break;
+
+				// move sample box up to check the next spot
+				if (distanceBetweenTwoRects(sampleBox, collisionBox) > boxTravelSize) {
+					float xMove = boxTravelSize * (cos(movementAngle*Globals::PI / 100));
+					float yMove = boxTravelSize * (sin(movementAngle*Globals::PI / 100));
+
+					sampleBox.x += xMove;
+					sampleBox.y += yMove;
+				}
+				else {
+					sampleBox = collisionBox;
+				}
+			}
+
+			if (foundCollision) {
+				// move our entity to where the sample box ended up
+				slideAmount = slideAmount / 2;
+				x = sampleBox.x + sampleBox.w / 2;
+				y = sampleBox.y - collisionBoxYOffset;
+			}
+			updateCollisionBox();
+		}
+	}
+}
 
 void changeAnimation(int newState, bool resetFrameToBeginning) = 0; //abstract function -> makes the entire class abstract
-void updateCollisions(); // how we bump into stuff in the world
+
 
 								 // HELP Functions
 static float distanceBetweenTwoRects(const SDL_Rect &r1, const SDL_Rect &r2);
