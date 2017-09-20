@@ -11,7 +11,7 @@ SDL_Renderer *Globals::renderer = NULL;
 string Globals::clipOffDataHeader(string data) {
 	int pos = data.find(":", 0); // returns where we find the : in the string otherwise returns -1
 	if (pos != -1) {
-		data = data.substr(pos + 1, data.length - pos + 2);
+		data = data.substr(pos+1, data.length() - pos + 2);
 	}
 	return data;
 }

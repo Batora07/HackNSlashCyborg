@@ -28,7 +28,7 @@ Animation* AnimationSet::getAnimation(string name) {
 // we would prefer to be transparent, then we can say yes to "colourKeying" (make a colour in the palette actually equal full transparent)
 // and then just use the index of that transparentPixel (e.g if its the third colour in the palette, then put 2 as index starts at 0)
 // if you need an alternative white version of the sprite sheet, then make this last option true
-void AnimationSet::loadAnimationSet(string fileName, list<DataGroupType> &groupTypes, bool setColourKey = false, int transparentPixelIndex = 0, bool createWhiteTexture = false) {
+void AnimationSet::loadAnimationSet(string fileName, list<DataGroupType> &groupTypes, bool setColourKey, int transparentPixelIndex, bool createWhiteTexture) {
 	
 	ifstream file;
 	string resPath = getResourcePath();

@@ -22,6 +22,6 @@ public:
 
 	// overriding entities draw
 	void draw();
-}
+};
 
 #endif

@@ -3,6 +3,7 @@
 #include "drawing_functions.h"
 #include "SDL_mixer.h"
 #include "globals.h"
+#include "game.h"
 
 int main(int argc, char **argv) {
 
@@ -54,7 +55,7 @@ int main(int argc, char **argv) {
 	}
 
 	// load up a texture to drawn
-	string resPath = getResourcePath();
+	/*string resPath = getResourcePath();
 	SDL_Texture *texture = loadTexture(resPath + "map.png", Globals::renderer);
 
 	// run game for 5000 ticks (5000ms)
@@ -65,11 +66,14 @@ int main(int argc, char **argv) {
 		renderTexture(texture, Globals::renderer, 0, 0);
 		// show image we've been rendering
 		SDL_RenderPresent(Globals::renderer);
-	}
+	}*/
+
+	Game game;
+	game.update();
 
 	cleanup(Globals::renderer);
 	cleanup(window);
-	cleanup(texture);
+	//cleanup(texture);
 
 	SDL_Quit();
 	return 0;
