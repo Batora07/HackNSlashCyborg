@@ -74,6 +74,7 @@ public:
 	static float distanceBetweenTwoEntities(const Entity *e1, const Entity *e2);
 	static float angleBetweenTwoEntities(const Entity *e1, const Entity *e2);
 	static bool checkCollision(const SDL_Rect cbox1, const SDL_Rect cbox2);
+	// converts a 360degree angle into one of our constant value (0,1,2,3,-1)
 	static int angleToDirection(float);
 	static float angleBetweenTwoPoints(float cx1, float cy1, float cx2, float cy2);
 	static float angleBetweenTwoRects(const SDL_Rect &r1, const SDL_Rect &r2);

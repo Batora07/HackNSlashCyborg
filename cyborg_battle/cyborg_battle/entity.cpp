@@ -178,20 +178,109 @@ void Entity::updateCollisions() {
 	}
 }
 
-void changeAnimation(int newState, bool resetFrameToBeginning) = 0; //abstract function -> makes the entire class abstract
-
-
 								 // HELP Functions
-static float distanceBetweenTwoRects(const SDL_Rect &r1, const SDL_Rect &r2);
-static float distanceBetweenTwoEntities(const Entity *e1, const Entity *e2);
-static float angleBetweenTwoEntities(const Entity *e1, const Entity *e2);
-static bool checkCollision(const SDL_Rect cbox1, const SDL_Rect cbox2);
-static int angleToDirection(float, float);
-static float angleBetweenTwoPoints(float cx1, float cy1, float cx2, float cy2);
-static float angleBetweenTwoRects(const SDL_Rect &r1, const SDL_Rect &r2);
+float Entity::distanceBetweenTwoRects(const SDL_Rect &r1, const SDL_Rect &r2) {
+	SDL_Point e1, e2;
+	e1.x = r1.x + r1.w / 2;
+	e1.y = r1.y + r1.h / 2;
+
+	e2.x = r2.x + r2.w / 2;
+	e2.y = r2.y + r2.h / 2;
+
+	float d = abs(sqrt(pow(e2.x - e1.x, 2)+pow(e2.y - e1.y, 2)));
+	return d;
+}
+
+float distanceBetweenTwoEntities(const Entity *e1, const Entity *e2) {
+	float d = abs(sqrt(pow(e2->x - e1->x,2) + pow(e2->y - e1->y, 2)));
+	return d;
+}
+
+float angleBetweenTwoEntities(const Entity *e1, const Entity *e2) {
+	float dx, dy;
+	float x1 = e1->x, y1 = e1->y, x2 = e2->x, y2 = e2->y;
+	
+	dx = x2 - x1;
+	dy = y2 - y1;
+
+	// atan2 gives angle in radian that we then converts in degrees (hence why the * 180/pi)
+	return atan2(dy, dx) * 180 / Globals::PI;
+}
+
+bool checkCollision(const SDL_Rect cbox1, const SDL_Rect cbox2) {
+	if (SDL_IntersectRect(&cbox1, &cbox2, nullptr)) {
+		return true;
+	}
+
+	// check if a rectangle is in another rectangle 
+		// then do it here
+	
+	return false;
+}
+
+int Entity::angleToDirection(float angle) {
+	if ((angle >= 0 && angle <= 45) || (angle >= 315 && angle <= 360)) {
+		return DIR_RIGHT;
+	}
+	else if (angle >= 45 && angle <= 135) {
+		return DIR_DOWN;
+	}
+	else if (angle >= 135 && angle <= 225) {
+		return DIR_LEFT;
+	}
+	else
+		return DIR_UP;
+}
+
+float Entity::angleBetweenTwoPoints(float cx1, float cy1, float cx2, float cy2) {
+	float dx = cx2 - cx1;
+	float dy = cy2 - cy1;
+
+	return atan2(dy, dx) * 180 / Globals::PI;
+}
+
+float Entity::angleBetweenTwoRects(const SDL_Rect &r1, const SDL_Rect &r2) {
+	float cx1 = r1.x + (r1.w / 2);
+	float cy1 = r1.y + (r1.h / 2);
+
+	float cx2 = r2.x + (r2.w / 2);
+	float cy2 = r2.y + (r2.h / 2);
+
+	return angleBetweenTwoPoints(cx1, cy1, cx2, cy2);
+}
 
 // global entities list I can refer to anytime
-static list<Entity*> entities;
-static bool EntityCompare(const Entity* const &a, const Entity* const &b); // helps compare 2 entities in a list to help sorting (sorts based on y value)
-static void removeInactiveEntitiesFromList(list<Entity*> *entityList, bool deleteEntities);
-static void removeAllFromList(list<Entity*> *entityList, bool deleteEntities);
+list<Entity*> Entity::entities;
+
+bool Entity::EntityCompare(const Entity* const &a, const Entity* const &b) {
+	if (a != 0 && b != 0) {
+		return (a->y < b->y);
+	}
+	else {
+		return false;
+	}
+}
+
+void Entity::removeInactiveEntitiesFromList(list<Entity*> *entityList, bool deleteEntities) {
+	for (auto entity = entityList->begin(); entity != entityList->end();) {
+		//not active?
+		if (!(*entity)->active)
+		{
+			if (deleteEntities)
+				delete(*entity);
+			entity = entityList->erase(entity);
+		}
+		else {
+			entity++;
+		}
+	}
+}
+
+void Entity::removeAllFromList(list<Entity*> *entityList, bool deleteEntities) {
+	for (auto entity = entityList->begin(); entity != entityList->end();) {	
+		if (deleteEntities)
+			delete(*entity);
+		entity = entityList->erase(entity);
+		
+	}
+}
