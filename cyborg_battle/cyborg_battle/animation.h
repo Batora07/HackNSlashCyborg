@@ -14,7 +14,7 @@ public:
 
 	int getNextFrameNumber(int frameNumber); //return the next frame number in the list
 	Frame* getNextFrame(Frame* frame); // whatever frame we're up to, it checks its frame number and returns the one after that
-	int getEndFrameNumber(int frameNumber); //returns the last frame number
+	int getEndFrameNumber(); //returns the last frame number
 	Frame* getFrame(int frameNumber); // get frame using frame number
 
 	void loadAnimation(ifstream &file, list<DataGroupType> &groupTypes);

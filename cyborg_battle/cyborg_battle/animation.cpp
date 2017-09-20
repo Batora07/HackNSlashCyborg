@@ -15,8 +15,8 @@ int Animation::getNextFrameNumber(int frameNumber) {
 Frame* Animation::getNextFrame(Frame* frame) {
 	return getFrame(getNextFrameNumber(frame->frameNumber));
 }
-int Animation::getEndFrameNumber(int frameNumber){
-	return (frameNumber + 1) % frames.size;
+int Animation::getEndFrameNumber(){
+	return frames.size()-1;
 }
 Frame* Animation::getFrame(int frameNumber) {
 	if (frames.size() == 0) {

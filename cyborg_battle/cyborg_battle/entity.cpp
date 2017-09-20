@@ -1,7 +1,5 @@
 #include "entity.h"
 
-const int Entity::DIR_UP = 0, Entity::DIR_DOWN = 1, Entity::DIR_LEFT = 2, Entity::DIR_RIGHT = 3, Entity::DIR_NONE = -1;
-
 // Virtual functions
 void Entity::update() { ; } // override me to do something useful
 

@@ -9,7 +9,13 @@
 class Entity {
 public:
 	// reference constants
-	static const int DIR_UP, DIR_DOWN, DIR_LEFT, DIR_RIGHT, DIR_NONE;
+	enum Directions { 
+		DIR_NONE = -1, 
+		DIR_UP = 0, 
+		DIR_DOWN = 1, 
+		DIR_LEFT = 2, 
+		DIR_RIGHT = 3
+	};
 
 	// keeps track of the state from the entity
 	int state;
