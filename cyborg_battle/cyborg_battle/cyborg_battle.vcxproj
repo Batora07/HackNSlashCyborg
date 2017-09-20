@@ -131,6 +131,7 @@
     <ClCompile Include="globals.cpp" />
     <ClCompile Include="groupBuilder.cpp" />
     <ClCompile Include="hero.cpp" />
+    <ClCompile Include="keyboardInput.cpp" />
     <ClCompile Include="livingEntity.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="randomNumber.cpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="groupPosition.h" />
     <ClInclude Include="groupString.h" />
     <ClInclude Include="hero.h" />
+    <ClInclude Include="keyboardInput.h" />
     <ClInclude Include="livingEntity.h" />
     <ClInclude Include="randomNumber.h" />
     <ClInclude Include="res_path.h" />
