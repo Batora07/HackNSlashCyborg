@@ -150,6 +150,7 @@
     <ClInclude Include="groupNumber.h" />
     <ClInclude Include="groupPosition.h" />
     <ClInclude Include="groupString.h" />
+    <ClInclude Include="livingEntity.h" />
     <ClInclude Include="randomNumber.h" />
     <ClInclude Include="res_path.h" />
     <ClInclude Include="timeController.h" />

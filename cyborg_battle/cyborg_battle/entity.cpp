@@ -191,12 +191,12 @@ float Entity::distanceBetweenTwoRects(const SDL_Rect &r1, const SDL_Rect &r2) {
 	return d;
 }
 
-float distanceBetweenTwoEntities(const Entity *e1, const Entity *e2) {
+float Entity::distanceBetweenTwoEntities(const Entity *e1, const Entity *e2) {
 	float d = abs(sqrt(pow(e2->x - e1->x,2) + pow(e2->y - e1->y, 2)));
 	return d;
 }
 
-float angleBetweenTwoEntities(const Entity *e1, const Entity *e2) {
+float Entity::angleBetweenTwoEntities(const Entity *e1, const Entity *e2) {
 	float dx, dy;
 	float x1 = e1->x, y1 = e1->y, x2 = e2->x, y2 = e2->y;
 	
@@ -207,7 +207,7 @@ float angleBetweenTwoEntities(const Entity *e1, const Entity *e2) {
 	return atan2(dy, dx) * 180 / Globals::PI;
 }
 
-bool checkCollision(const SDL_Rect cbox1, const SDL_Rect cbox2) {
+bool Entity::checkCollision(const SDL_Rect cbox1, const SDL_Rect cbox2) {
 	if (SDL_IntersectRect(&cbox1, &cbox2, nullptr)) {
 		return true;
 	}
@@ -281,6 +281,5 @@ void Entity::removeAllFromList(list<Entity*> *entityList, bool deleteEntities) {
 		if (deleteEntities)
 			delete(*entity);
 		entity = entityList->erase(entity);
-		
 	}
 }
