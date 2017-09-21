@@ -34,6 +34,9 @@ Game::Game() {
 	wallAnimSet = new AnimationSet();
 	wallAnimSet->loadAnimationSet("wall.fdset", dataGroupTypes);
 
+	globAnimSet = new AnimationSet();
+	globAnimSet->loadAnimationSet("glob.fdset", dataGroupTypes, true, 0, true);
+
 	//build hero entity
 	hero = new Hero(heroAnimSet);
 	hero->invincibleTimer = 0;
@@ -87,15 +90,22 @@ Game::~Game() {
 	Entity::removeAllFromList(&Entity::entities, false);
 
 	delete heroAnimSet;
+	delete globAnimSet;
 	delete wallAnimSet;
 
 	delete hero;
 
 	//delete all of the wall entities
 	Entity::removeAllFromList(&walls, true);
+	Entity::removeAllFromList(&enemies, true);
 }
 
 void Game::update() {
+	// enemy related
+	int enemiesToBuild = 2;
+	int enemiesBuilt = 0;
+	float enemyBuildTimer = 1;
+
 	bool quit = false;
 
 	SDL_Event e;
@@ -106,7 +116,9 @@ void Game::update() {
 		TimeController::timeController.updateTime();
 
 		Entity::removeInactiveEntitiesFromList(&Entity::entities, false);
-
+		//remove / delete enemies in the enemy list who are dead / inactive
+		Entity::removeInactiveEntitiesFromList(&enemies, true);
+	
 		//check for any events that might have happened
 		while (SDL_PollEvent(&e)) {
 			//close the window
@@ -135,6 +147,25 @@ void Game::update() {
 			(*entity)->update();
 		}
 
+		// spawn enemies
+		if (hero->hp > 0) {
+			if (enemiesToBuild == enemiesBuilt) {
+				enemiesToBuild = enemiesToBuild * 2;
+				enemiesBuilt = 0;
+				enemyBuildTimer = 4;
+			}
+		}
+		enemyBuildTimer -= TimeController::timeController.dT;
+		if (enemyBuildTimer <= 0 && enemiesBuilt < enemiesToBuild && enemies.size() < 10) {
+			Glob *enemy = new Glob(globAnimSet);
+			// tile size is 32, half tile size = 16
+			enemy->x = getRandomNumber(Globals::ScreenWidth - (2*32) - 32) + 32 + 16;
+			enemy->y = getRandomNumber(Globals::ScreenHeight - (2 * 32) - 32) + 32 + 16;
+			enemy->invincibleTimer = 0.1;
+
+			enemies.push_back(enemy);
+			Entity::entities.push_back(enemy);
+		}
 		//draw all entities
 		draw();
 	}
