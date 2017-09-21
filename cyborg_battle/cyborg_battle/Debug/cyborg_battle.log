@@ -1,12 +1,17 @@
-﻿  livingEntity.cpp
-d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\livingentity.cpp(11): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\livingentity.cpp(12): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\livingentity.cpp(19): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  glob.cpp
-d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\glob.cpp(38): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\glob.cpp(39): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\glob.cpp(83): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\glob.cpp(283): warning C4305: '=': truncation from 'double' to 'float'
+﻿  game.cpp
+d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\game.cpp(48): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\game.cpp(49): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\game.cpp(61): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\game.cpp(62): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\game.cpp(68): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\game.cpp(69): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\game.cpp(77): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\game.cpp(78): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\game.cpp(84): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\game.cpp(85): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\game.cpp(196): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\game.cpp(197): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\game.cpp(198): warning C4305: '=': truncation from 'double' to 'float'
   entity.cpp
 d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\entity.cpp(86): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\entity.cpp(87): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
@@ -21,6 +26,10 @@ d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\entity.cpp(246): warning C424
 d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\entity.cpp(247): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
 d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\entity.cpp(249): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
 d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\entity.cpp(250): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
+  Compiling...
+  main.cpp
+d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\main.cpp(12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   Generating Code...
   cyborg_battle.vcxproj -> D:\GameDev\cppProjects\cyborg_battle\Debug\cyborg_battle.exe
   cyborg_battle.vcxproj -> D:\GameDev\cppProjects\cyborg_battle\Debug\cyborg_battle.pdb (Partial PDB)
