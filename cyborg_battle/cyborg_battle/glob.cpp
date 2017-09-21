@@ -142,7 +142,7 @@ void Glob::die() {
 	state = GLOB_STATE_DEAD;
 	changeAnimation(state, true);
 
-	//TODO ADD DYING SOUND
+	SoundManager::soundManager.playSound("enemyDie");
 
 	// Add to our score count
 	Glob::globsKilled++;
@@ -279,7 +279,7 @@ void Glob::updateDamages() {
 					hp -= enemy->damage;
 
 					if (hp > 0) {
-						// TODO play hurt sound
+						SoundManager::soundManager.playSound("enemyHit");
 						invincibleTimer = 0.1;
 					}
 					// angle from other entity, towards this entity (get thrown backwards)

@@ -7,9 +7,12 @@
 #include "glob.h"
 #include "keyboardInput.h"
 #include "drawing_functions.h"
+#include "soundManager.h"
 
 class Game {
 public:
+	Mix_Music *song;
+
 	AnimationSet* heroAnimSet;
 	AnimationSet* globAnimSet;
 	AnimationSet* wallAnimSet;

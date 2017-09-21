@@ -69,6 +69,9 @@
     <ClCompile Include="glob.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="soundManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cleanup.h">
@@ -138,6 +141,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="glob.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="soundManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

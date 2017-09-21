@@ -9,6 +9,17 @@ Game::Game() {
 	splashShowing = true;
 	overlayTimer = 2;
 
+	// load up sounds
+	SoundManager::soundManager.loadSound("hit", resPath + "Randomize2.wav");
+	SoundManager::soundManager.loadSound("enemyHit", resPath + "Hit_Hurt9.wav");
+	SoundManager::soundManager.loadSound("swing", resPath + "Randomize21.wav");
+	SoundManager::soundManager.loadSound("dash", resPath + "dash.wav");
+	SoundManager::soundManager.loadSound("enemyDie", resPath + "Randomize41.wav");
+	// load Music
+	song = Mix_LoadMUS(string(resPath + "Fatal Theory.wav").c_str()); // song by Ryan Beveridgre https://soundcloud.com/ryan-beveridge
+	if (song != NULL) 
+		Mix_PlayMusic(song, -1);
+
 	//holds a list of group types. this list describes the types of groups of data our frames can have!
 	list<DataGroupType> dataGroupTypes;
 
@@ -93,6 +104,9 @@ Game::~Game() {
 	cleanup(backgroundImage);
 	cleanup(splashImage);
 	cleanup(overlayImage);
+
+	Mix_PauseMusic();
+	Mix_FreeMusic(song);
 
 	if (scoreTexture != NULL) { // if used then cleanup
 		cleanup(scoreTexture);

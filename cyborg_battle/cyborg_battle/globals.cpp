@@ -2,7 +2,8 @@
 
 const float Globals::PI = 3.14159;
 
-bool Globals::debugging = true;
+//set to true to see hitboxes
+bool Globals::debugging = false;
 
 
 int Globals::ScreenWidth = 640, Globals::ScreenHeight = 352, Globals::ScreenScale = 1;

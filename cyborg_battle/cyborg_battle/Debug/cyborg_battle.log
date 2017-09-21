@@ -1,31 +1,17 @@
 ﻿  game.cpp
-d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\game.cpp(48): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\game.cpp(49): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\game.cpp(61): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\game.cpp(62): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\game.cpp(68): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\game.cpp(69): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\game.cpp(77): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\game.cpp(78): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\game.cpp(84): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\game.cpp(85): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\game.cpp(196): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\game.cpp(197): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\game.cpp(198): warning C4305: '=': truncation from 'double' to 'float'
-  entity.cpp
-d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\entity.cpp(86): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\entity.cpp(87): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\entity.cpp(119): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\entity.cpp(121): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\entity.cpp(125): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\entity.cpp(172): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\entity.cpp(173): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\entity.cpp(183): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\entity.cpp(201): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\entity.cpp(246): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\entity.cpp(247): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\entity.cpp(249): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\entity.cpp(250): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\game.cpp(59): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\game.cpp(60): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\game.cpp(72): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\game.cpp(73): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\game.cpp(79): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\game.cpp(80): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\game.cpp(88): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\game.cpp(89): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\game.cpp(95): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\game.cpp(96): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\game.cpp(210): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\game.cpp(211): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\gamedev\cppprojects\cyborg_battle\cyborg_battle\game.cpp(212): warning C4305: '=': truncation from 'double' to 'float'
   Generating Code...
   Compiling...
   main.cpp
