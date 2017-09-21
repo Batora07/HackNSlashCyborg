@@ -122,6 +122,8 @@ void Entity::updateCollisions() {
 
 			//use sampleBox to check for collisions from start point to end point, moving at boxTravelSize each sample
 			SDL_Rect sampleBox = lastCollisionBox;
+			float collisionMoveX = sampleBox.x, collisionMoveY = sampleBox.y;
+
 			float movementAngle = Entity::angleBetweenTwoRects(lastCollisionBox, collisionBox);
 
 			bool foundCollision = false;
@@ -158,11 +160,17 @@ void Entity::updateCollisions() {
 
 				//move sample box up to check the next spot
 				if (distanceBetweenTwoRects(sampleBox, collisionBox) > boxTravelSize) {
+					movementAngle = Entity::angleBetweenTwoRects(sampleBox, collisionBox);
 					float xMove = boxTravelSize * (cos(movementAngle*Globals::PI / 180));
 					float yMove = boxTravelSize * (sin(movementAngle * Globals::PI / 180));
+					
+					
+					// fix for float values below 1 e.G 0.71 being truncated to sampleBox.x as thats an int
+					collisionMoveX += xMove;
+					collisionMoveY += yMove;
 
-					sampleBox.x += xMove;
-					sampleBox.y += yMove;
+					sampleBox.x = collisionMoveX;
+					sampleBox.y = collisionMoveY;
 				}
 				else {
 					sampleBox = collisionBox;
