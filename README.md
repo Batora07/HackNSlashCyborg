@@ -1,4 +1,5 @@
 # HackNSlashCyborg
+[![PLG01](cyborg_battle/img/gameOverview.gif)](cyborg_battle/img/gameOverview.gif)
 A hack' n slash game made in C++ with the SDL2 library.
 (To make the project works, you need to have the sdl2 library located at C:\sdl2)
 Made thanks to the assets and courses from Matthew Carr (https://twitter.com//2HitMatt)
