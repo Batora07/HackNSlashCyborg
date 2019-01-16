@@ -20,4 +20,7 @@ To compile this project you need to install the following libraries :
   - SDL ttf 2.0 :
        available here : https://www.libsdl.org/projects/SDL_ttf/
        (follow the same steps as above to install it)
+  - SDL mixer 2.0 :
+       available here : https://www.libsdl.org/projects/SDL_mixer/
+       (follow the same steps as above to install it)
   
