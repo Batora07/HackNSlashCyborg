@@ -7,7 +7,7 @@ void Entity::draw() {
 	//override me if you want something else or more specific to happen
 	//draws current frame
 	if (currentFrame != NULL && active) {
-		currentFrame->Draw(animSet->spriteSheet, x, y);
+		currentFrame->Draw(animSet->spriteSheet, x - Globals::camera.x, y - Globals::camera.y);
 	}
 	//draw collsionBox
 	if (solid && Globals::debugging) {

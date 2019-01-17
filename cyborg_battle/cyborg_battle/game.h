@@ -8,6 +8,7 @@
 #include "keyboardInput.h"
 #include "drawing_functions.h"
 #include "soundManager.h"
+#include "CameraController.h"
 
 class Game {
 public:
@@ -31,6 +32,8 @@ public:
 
 	bool splashShowing;
 	float overlayTimer;
+
+	CameraController camController;
 
 	Game();
 	~Game();

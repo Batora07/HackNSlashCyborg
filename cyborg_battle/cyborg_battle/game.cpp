@@ -9,6 +9,12 @@ Game::Game() {
 	splashShowing = true;
 	overlayTimer = 2;
 
+	// Setup Camera
+	Globals::camera.x = 0;
+	Globals::camera.y = 0;
+	Globals::camera.w = Globals::ScreenWidth;
+	Globals::camera.h = Globals::ScreenHeight;
+
 	// load up sounds
 	SoundManager::soundManager.loadSound("hit", resPath + "Randomize2.wav");
 	SoundManager::soundManager.loadSound("enemyHit", resPath + "Hit_Hurt9.wav");
@@ -62,6 +68,9 @@ Game::Game() {
 	heroInput.hero = hero;
 	//add hero to the entity list
 	Entity::entities.push_back(hero);
+
+	// GET CAMERA TO FOLLOW HERO
+	camController.target = hero;
 
 	int tileSize = 32;
 	//build all the walls for this game
@@ -214,6 +223,10 @@ void Game::update() {
 			enemies.push_back(enemy);
 			Entity::entities.push_back(enemy);
 		}
+
+		// Update camera positions
+		camController.update();
+
 		//draw all entities
 		draw();
 	}
@@ -229,7 +242,7 @@ void Game::draw() {
 	}
 	else {
 		//draw the background
-		renderTexture(backgroundImage, Globals::renderer, 0, 0);
+		renderTexture(backgroundImage, Globals::renderer, 0 - Globals::camera.x, 0 - Globals::camera.y);
 
 		//sort all entities based on y(depth)
 		Entity::entities.sort(Entity::EntityCompare);
