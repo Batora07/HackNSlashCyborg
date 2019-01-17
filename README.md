@@ -10,6 +10,16 @@ UPDATES :
   - Add a camera with interpolation that smoothly follows the player around the stage :
   [![PLG02](cyborg_battle/img/cyborgBattleCameraMovement.gif)](cyborg_battle/img/cyborgBattleCameraMovement.gif)
 
+COMMAND LIST :
+  - Spacebar : Start the game / Restart the game 
+  - Escape key : Quit the game
+  - "W" key : Attack
+  - "X" key : Dodge/Sprint with invicinbility frame
+  - "up arrow" key : Move Up
+  - "down arrow" key : Move Down
+  - "right arrow" key : Move Right
+  - "left arrow key" : Move Left
+
 Credit:
 Course programming, curriculum design, and lectures: Matthew Carr
 
