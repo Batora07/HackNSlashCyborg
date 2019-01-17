@@ -7,8 +7,11 @@ Made thanks to the assets and courses from Matthew Carr (https://twitter.com//2H
 https://www.udemy.com/hack-n-slash-sdl2/learn/v4/overview
 
 UPDATES :
-  - Add a camera with interpolation that smoothly follows the player around the stage :
+  - (16/01/2019) : Add a camera with interpolation that smoothly follows the player around the stage :
   [![PLG02](cyborg_battle/img/cyborgBattleCameraMovement.gif)](cyborg_battle/img/cyborgBattleCameraMovement.gif)
+  
+   - (17/01/2019) : Add a new type of enemy (Grob) that just walk towards the player and hurt him if collided with
+  [![PLG03](cyborg_battle/img/grobEnemies.gif)](cyborg_battle/img/grobEnemies.gif)
 
 COMMAND LIST :
   - Spacebar : Start the game / Restart the game 
