@@ -125,6 +125,10 @@ Game::Game() {
 
 	buildBossNext = false;
 	bossActive = false;
+
+	//setup Boss HP Bar's x and y to be centered
+	bossHpBar.x = Globals::ScreenWidth / 2.0f - (bossHpBar.barWidth / 2.0f); // centered horizontally
+	bossHpBar.y = Globals::ScreenHeight - bossHpBar.barHeight - 20; // 20 pixels off the bottom of the screen
 }
 
 Game::~Game() {
@@ -198,6 +202,8 @@ void Game::update() {
 						enemyWavesTillBoss = 3;
 						bossActive = false;
 						buildBossNext = false;
+						// make bossHPBar point to no entities health
+						bossHpBar.entity = NULL;
 
 						Glob::globsKilled = 0;
 						Grob::grobsKilled = 0;
@@ -282,6 +288,9 @@ void Game::update() {
 				enemies.push_back(boss);
 				Entity::entities.push_back(boss);
 
+				//make HPBar point to boss
+				bossHpBar.entity = boss;
+
 				bossActive = true;
 				buildBossNext = false;
 				enemyWavesTillBoss = 3;
@@ -293,6 +302,9 @@ void Game::update() {
 				buildBossNext = false;
 				enemiesBuilt = 0;
 				enemiesToBuild = 2;
+
+				//when boss dead make sure hpBar doesn't reference him anymore
+				bossHpBar.entity = NULL;
 			}
 		}
 
@@ -322,6 +334,9 @@ void Game::draw() {
 			(*entity)->draw();
 		}
 
+		// Draw the UI stuff
+		bossHpBar.draw();
+
 		if (overlayTimer <= 0 && hero->hp < 1) {
 			renderTexture(overlayImage, Globals::renderer, 0, 0);
 			if (scoreTexture == NULL) {
@@ -329,7 +344,7 @@ void Game::draw() {
 				SDL_Color color = {255, 255, 255, 255}; // white
 
 				stringstream ss;
-				ss << "Enemies dispatched: " << Glob::globsKilled + Grob::grobsKilled;
+				ss << "Enemies dispatched: " << Glob::globsKilled + Grob::grobsKilled + RoundKing::bossKilled;
 
 				string resPath = getResourcePath();
 				scoreTexture = renderText(ss.str(), resPath+"vermin_vibes_1989.ttf", color, 30, Globals::renderer);

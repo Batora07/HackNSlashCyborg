@@ -33,7 +33,7 @@ Hero::Hero(AnimationSet *animSet) {
 	y = Globals::ScreenHeight / 2;
 	moveSpeed = 0;
 	moveSpeedMax = 80;
-	hp = hpMax = 20;
+	hp = hpMax = 50;
 	damage = 0;
 	collisionBoxW = 20;
 	collisionBoxH = 24;

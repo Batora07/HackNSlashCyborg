@@ -16,6 +16,9 @@ UPDATES :
   - (17/01/2019) : Add a boss battle encounter after 3 successful waves of enemies slained
   [![PLG04](cyborg_battle/img/bossBattle.gif)](cyborg_battle/img/bossBattle.gif)
   
+   - (17/01/2019) : Add a UI health bar for the boss and increased the player's health amount
+  [![PLG05](cyborg_battle/img/bossUIBar.gif)](cyborg_battle/img/bossUIBar.gif)
+  
 COMMAND LIST :
   - Spacebar : Start the game / Restart the game 
   - Escape key : Quit the game

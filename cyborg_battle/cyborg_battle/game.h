@@ -11,6 +11,7 @@
 #include "soundManager.h"
 #include "CameraController.h"
 #include "roundKing.h"
+#include "hpBar.h"
 
 class Game {
 public:
@@ -38,6 +39,8 @@ public:
 	int enemyWavesTillBoss = 3;
 	bool buildBossNext = false;
 	bool bossActive = false;
+
+	HPBar bossHpBar;
 
 	bool splashShowing;
 	float overlayTimer;
