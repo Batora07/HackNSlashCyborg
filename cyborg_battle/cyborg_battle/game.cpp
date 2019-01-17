@@ -66,6 +66,12 @@ Game::Game() {
 	grobAnimSet = new AnimationSet();
 	grobAnimSet->loadAnimationSet("grob.fdset", dataGroupTypes, true, 0, true);
 
+	roundKingAnimSet = new AnimationSet();
+	roundKingAnimSet->loadAnimationSet("roundKing.fdset", dataGroupTypes, true, 0, true);
+
+	bulletAnimSet = new AnimationSet();
+	bulletAnimSet->loadAnimationSet("bullet.fdset", dataGroupTypes, true, 0, true);
+
 	wallAnimSet = new AnimationSet();
 	wallAnimSet->loadAnimationSet("wall.fdset", dataGroupTypes);
 
@@ -117,6 +123,8 @@ Game::Game() {
 		Entity::entities.push_back(newWall);
 	}
 
+	buildBossNext = false;
+	bossActive = false;
 }
 
 Game::~Game() {
@@ -137,6 +145,8 @@ Game::~Game() {
 	delete globAnimSet;
 	delete grobAnimSet;
 	delete wallAnimSet;
+	delete roundKingAnimSet;
+	delete bulletAnimSet;
 
 	delete hero;
 
@@ -163,7 +173,7 @@ void Game::update() {
 		Entity::removeInactiveEntitiesFromList(&Entity::entities, false);
 		//remove / delete enemies in the enemy list who are dead / inactive
 		Entity::removeInactiveEntitiesFromList(&enemies, true);
-	
+
 		//check for any events that might have happened
 		while (SDL_PollEvent(&e)) {
 			//close the window
@@ -177,7 +187,7 @@ void Game::update() {
 					quit = true;
 					break;
 				case SDL_SCANCODE_SPACE:
-					if (splashShowing) 
+					if (splashShowing)
 						splashShowing = false;
 					if (overlayTimer <= 0 && hero->hp < 1) {
 						// cleanup and restart the game
@@ -185,9 +195,13 @@ void Game::update() {
 						enemiesBuilt = 0;
 						enemyBuildTimer = 3;
 						overlayTimer = 2;
+						enemyWavesTillBoss = 3;
+						bossActive = false;
+						buildBossNext = false;
 
 						Glob::globsKilled = 0;
 						Grob::grobsKilled = 0;
+						RoundKing::bossKilled = 0;
 						if (scoreTexture != NULL) {
 							cleanup(scoreTexture);
 							scoreTexture = NULL;
@@ -216,34 +230,69 @@ void Game::update() {
 			(*entity)->update();
 		}
 
-		// spawn enemies
+		// SPAWN ENEMIES & BOSS
 		if (hero->hp > 0 && !splashShowing) {
-			if (enemiesToBuild == enemiesBuilt) {
-				enemiesToBuild = enemiesToBuild * 2;
+			if (enemiesToBuild == enemiesBuilt && enemies.size() <= 0) {
+				enemiesToBuild = enemiesToBuild + 2;
 				enemiesBuilt = 0;
 				enemyBuildTimer = 4;
+				enemyWavesTillBoss--;
+
+				if (enemyWavesTillBoss <= 0) {
+					buildBossNext = true;
+				}
 			}
-		}
-		enemyBuildTimer -= TimeController::timeController.dT;
-		if (enemyBuildTimer <= 0 && enemiesBuilt < enemiesToBuild && enemies.size() < 10) {
-			Glob *enemy = new Glob(globAnimSet);
-			// tile size is 32, half tile size = 16
-			enemy->x = getRandomNumber(Globals::ScreenWidth - (2*32) - 32) + 32 + 16;
-			enemy->y = getRandomNumber(Globals::ScreenHeight - (2 * 32) - 32) + 32 + 16;
-			enemy->invincibleTimer = 0.1;
+			enemyBuildTimer -= TimeController::timeController.dT;
 
-			enemies.push_back(enemy);
-			Entity::entities.push_back(enemy);
+			//if no bosses on the prowl, check to see if we should build some enemies
+			if (!buildBossNext && !bossActive && enemyBuildTimer <= 0 && enemiesBuilt < enemiesToBuild && enemies.size() < 10) {
+				// IF WE HAVEN'T YET SPAWNED 5 ENEMIES THEN SPAWN GLOB ENEMIES
+				if (enemiesBuilt % 5 != 0) {
+					Glob *enemy = new Glob(globAnimSet);
+					// tile size is 32, half tile size = 16
+					// set enemies position to somewhere random within the arena's open space
+					enemy->x = getRandomNumber(Globals::ScreenWidth - (2 * 32) - 32) + 32 + 16;
+					enemy->y = getRandomNumber(Globals::ScreenHeight - (2 * 32) - 32) + 32 + 16;
+					enemy->invincibleTimer = 0.1;
 
-			// SPAWN GROB ENEMIES EVERY 5 ENEMIES SPAWNED
-			if (enemiesBuilt % 5 == 0) {
-				Grob *grob = new Grob(grobAnimSet);
-				grob->x = getRandomNumber(Globals::ScreenWidth - (2 * 32) - 32) + 32 + 16; // random x values between our walls
-				grob->y = getRandomNumber(Globals::ScreenHeight - (2 * 32) - 32) + 32 + 16; // random y values between our walls
-				grob->invincibleTimer = 0.01f;
+					enemies.push_back(enemy);
+					Entity::entities.push_back(enemy);
 
-				enemies.push_back(grob);
-				Entity::entities.push_back(grob);
+					// ELSE SPAWN GROB ENEMIES EVERY 5 GLOB ENEMIES SPAWNED
+				}
+				else {
+					Grob *grob = new Grob(grobAnimSet);
+					grob->x = getRandomNumber(Globals::ScreenWidth - (2 * 32) - 32) + 32 + 16; // random x values between our walls
+					grob->y = getRandomNumber(Globals::ScreenHeight - (2 * 32) - 32) + 32 + 16; // random y values between our walls
+					grob->invincibleTimer = 0.01f;
+
+					enemies.push_back(grob);
+					Entity::entities.push_back(grob);
+				}
+
+				enemiesBuilt++;
+				enemyBuildTimer = 1;
+			}
+
+			// FOR THE BOSS
+			if (buildBossNext && enemyBuildTimer <= 0 && enemies.size() == 0) {
+				RoundKing *boss = new RoundKing(roundKingAnimSet, bulletAnimSet);
+
+				boss->invincibleTimer = 0.1f;  //invincible at spawn ofc
+				enemies.push_back(boss);
+				Entity::entities.push_back(boss);
+
+				bossActive = true;
+				buildBossNext = false;
+				enemyWavesTillBoss = 3;
+			}
+
+			// If there was a boss but he's dead now, go back to spawning normal enemies till the next boss
+			if (bossActive && enemies.size() == 0) {
+				bossActive = false;
+				buildBossNext = false;
+				enemiesBuilt = 0;
+				enemiesToBuild = 2;
 			}
 		}
 
@@ -253,7 +302,6 @@ void Game::update() {
 		//draw all entities
 		draw();
 	}
-
 }
 void Game::draw() {
 	//clear the screen

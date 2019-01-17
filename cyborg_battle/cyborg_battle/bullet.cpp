@@ -1,6 +1,6 @@
 #include "bullet.h"
 
-const string BULLET_ANIM = "bullet";
+const string Bullet::BULLET_ANIM = "bullet";
 
 Bullet::Bullet(AnimationSet* animSet, int x, int y) {
 	this->animSet = animSet;

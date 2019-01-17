@@ -1,24 +1,24 @@
 #include "roundKing.h"
 
-const string ROUND_KING_ANIM_IDLE = "idle";
-const string ROUND_KING_ANIM_CHARGE = "charge";
-const string ROUND_KING_ANIM_SHOOT = "shoot";
-const string ROUND_KING_ANIM_SLAM = "slam";
-const string ROUND_KING_ANIM_JUMP_TELEGRAPH = "jumpTelegraph";
-const string ROUND_KING_ANIM_JUMP = "jump";
-const string ROUND_KING_ANIM_DIE = "die";
+const string RoundKing::ROUND_KING_ANIM_IDLE = "idle";
+const string RoundKing::ROUND_KING_ANIM_CHARGE = "charge";
+const string RoundKing::ROUND_KING_ANIM_SHOOT = "shoot";
+const string RoundKing::ROUND_KING_ANIM_SLAM = "slam";
+const string RoundKing::ROUND_KING_ANIM_JUMP_TELEGRAPH = "jumpTelegraph";
+const string RoundKing::ROUND_KING_ANIM_JUMP = "jump";
+const string RoundKing::ROUND_KING_ANIM_DIE = "die";
 
-const int ROUND_KING_STATE_IDLE = 1;
-const int ROUND_KING_STATE_CHARGE = 2;
-const int ROUND_KING_STATE_SHOOT = 3;
-const int ROUND_KING_STATE_SLAM = 4;
-const int ROUND_KING_STATE_JUMP_TELEGRAPH = 5;
-const int ROUND_KING_STATE_JUMP = 6;
-const int ROUND_KING_STATE_DEAD = 7;
+const int RoundKing::ROUND_KING_STATE_IDLE = 1;
+const int RoundKing::ROUND_KING_STATE_CHARGE = 2;
+const int RoundKing::ROUND_KING_STATE_SHOOT = 3;
+const int RoundKing::ROUND_KING_STATE_SLAM = 4;
+const int RoundKing::ROUND_KING_STATE_JUMP_TELEGRAPH = 5;
+const int RoundKing::ROUND_KING_STATE_JUMP = 6;
+const int RoundKing::ROUND_KING_STATE_DEAD = 7;
 
-const int ROUND_KING_PHASE_NORMAL = 1;
-const int ROUND_KING_PHASE_DAMAGED = 2;
-const int ROUND_KING_PHASE_FRANTIC = 3;
+const int RoundKing::ROUND_KING_PHASE_NORMAL = 1;
+const int RoundKing::ROUND_KING_PHASE_DAMAGED = 2;
+const int RoundKing::ROUND_KING_PHASE_FRANTIC = 3;
 
 int RoundKing::bossKilled = 0;
 
