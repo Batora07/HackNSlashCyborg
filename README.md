@@ -3,7 +3,7 @@
 
 A hack' n slash game made in C++ with the SDL2 library.
 (To make the project works, you need to have the sdl2 library located at C:\sdl2)
-Made thanks to the assets and courses from Matthew Carr (https://twitter.com/2HitMatt)
+Made thanks to the assets and courses from Matthew Carr (https://twitter.com//2HitMatt)
 https://www.udemy.com/hack-n-slash-sdl2/learn/v4/overview
 
 UPDATES :
@@ -13,6 +13,9 @@ UPDATES :
    - (17/01/2019) : Add a new type of enemy (Grob) that just walk towards the player and hurt him if collided with
   [![PLG03](cyborg_battle/img/grobEnemies.gif)](cyborg_battle/img/grobEnemies.gif)
 
+  - (17/01/2019) : Add a boss battle encounter after 3 successful waves of enemies slained
+  [![PLG04](cyborg_battle/img/bossBattle.gif)](cyborg_battle/img/bossBattle.gif)
+  
 COMMAND LIST :
   - Spacebar : Start the game / Restart the game 
   - Escape key : Quit the game
