@@ -32,6 +32,8 @@ public:
 	static const int ROUND_KING_PHASE_DAMAGED;
 	static const int ROUND_KING_PHASE_FRANTIC;
 
+	static int bossKilled;
+
 	float thinkTimer = 0;                             //when 0 do new action
 	float shootTimer = 0;                             //how long to shoot for
 	float bulletTimer = 0;                            //how long between bullets
@@ -45,14 +47,14 @@ public:
 	void update();
 	void updateShoot();
 	void think();
-	void charge();
+	void charge();  // telegraph animation before shooting
 	void shoot();
 	void slam();
 	void jumpTelegraph();
 	void jump();
 	void die();
 	void findNearestTarget();                          //TODO : move find nearest target to somewhere better, maybe static
-	void changeAnimation(int newState, bool resetFRameToBeginning);
+	void changeAnimation(int newState, bool resetFrameToBeginning);
 	void updateAnimation();
 	void updateDamages();
 };
