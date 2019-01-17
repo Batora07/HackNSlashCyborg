@@ -92,7 +92,76 @@ void RoundKing::updateShoot() {
 }
 
 void RoundKing::think() {
+	// finds closest hero
+	findNearestTarget();
 
+	//if there is a hero we can target, do the thinking
+	if (target != NULL) {
+		//only tick down think timer if in IDLE state
+		if (state == ROUND_KING_STATE_IDLE) 
+			thinkTimer -= TimeController::timeController.dT;
+		
+		//keep setting angle to point towards target
+		angle = Entity::angleBetweenTwoEntities(this, target);
+
+		// CHECK WHICH PHASE WE ARE IN
+		if (hp > 250) 
+			aiState = ROUND_KING_PHASE_NORMAL;
+		else if (hp > 100) 
+			aiState = ROUND_KING_PHASE_DAMAGED;
+		else 
+			aiState = ROUND_KING_PHASE_FRANTIC;
+		
+		// if thinkTimer is up, work out what to do next
+		if (thinkTimer <= 0 && state == ROUND_KING_STATE_IDLE) {
+			// reset animations, we're about to do something new
+			frameTimer = 0;
+
+			//in normal phase do :
+			if (aiState == ROUND_KING_PHASE_NORMAL) {
+				//reset timer
+				thinkTimer = 2;
+
+				// randomly select either slam or charge
+				int action = getRandomNumber(4);
+				if (action % 2 == 0) 
+					slam();
+				else 
+					charge();
+			}
+			//in damaged phase do :
+			else if (aiState == ROUND_KING_PHASE_DAMAGED) {
+				//reset timer
+				thinkTimer = 1.5f;
+
+				// randomly select either slam, charge or jump
+				int action = getRandomNumber(6);
+				if (action < 2)
+					slam();
+				else if (action < 4)
+					charge();
+				else
+					jumpTelegraph();
+			}
+			else {
+				//assuming we are in frantic phase
+				//reset timer
+				thinkTimer = 1;
+
+				// randomly select either charge or jump
+				int action = getRandomNumber(4);
+				if (action % 2 == 0)
+					jumpTelegraph();
+				else
+					charge();
+			}
+		}
+	}
+	else {
+		// targeting no one
+		moving = 0;
+		changeAnimation(ROUND_KING_STATE_IDLE, (state != ROUND_KING_STATE_IDLE));
+	}
 }
 
 void RoundKing::charge() {
