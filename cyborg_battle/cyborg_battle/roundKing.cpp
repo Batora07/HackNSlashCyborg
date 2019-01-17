@@ -210,7 +210,7 @@ void RoundKing::die() {
 	SoundManager::soundManager.playSound("enemyDie");
 
 	// add to our score count
-	RoundKing::bossKilled++;
+	bossKilled++;
 }
 
 void RoundKing::findNearestTarget() {
@@ -306,5 +306,25 @@ void RoundKing::updateAnimation() {
 }
 
 void RoundKing::updateDamages() {
+	// is roundking hitable
+	if (active && hp > 0 && invincibleTimer <= 0) {
+		for (auto entity = Entity::entities.begin(); entity != Entity::entities.end(); entity++) {
+			if ((*entity)->active && (*entity)->type == "hero") {
+				//cast entity pointer to livingEntity pointer
+				LivingEntity* enemy = (LivingEntity*)(*entity);
 
+				//if enemy is hitting me
+				if (enemy->damage > 0 && Entity::checkCollision(collisionBox, enemy->hitBox)) {
+					enemy->hitLanded(this);
+					// roundking get hurt by player
+					hp -= enemy->damage;
+
+					if (hp > 0) {
+						SoundManager::soundManager.playSound("enemyHit");
+						invincibleTimer = 0.1f;
+					}
+				}
+			}
+		}
+	}
 }
