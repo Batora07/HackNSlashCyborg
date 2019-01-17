@@ -20,6 +20,7 @@ Game::Game() {
 	SoundManager::soundManager.loadSound("enemyHit", resPath + "Hit_Hurt9.wav");
 	SoundManager::soundManager.loadSound("swing", resPath + "Randomize21.wav");
 	SoundManager::soundManager.loadSound("dash", resPath + "dash.wav");
+	SoundManager::soundManager.loadSound("growl", resPath + "Randomize34.wav");
 	SoundManager::soundManager.loadSound("enemyDie", resPath + "Randomize41.wav");
 	// load Music
 	song = Mix_LoadMUS(string(resPath + "Fatal Theory.wav").c_str()); // song by Ryan Beveridgre https://soundcloud.com/ryan-beveridge
@@ -53,11 +54,14 @@ Game::Game() {
 	heroAnimSet = new AnimationSet();
 	heroAnimSet->loadAnimationSet("udemyCyborg.fdset", dataGroupTypes, true, 0, true);
 
-	wallAnimSet = new AnimationSet();
-	wallAnimSet->loadAnimationSet("wall.fdset", dataGroupTypes);
-
 	globAnimSet = new AnimationSet();
 	globAnimSet->loadAnimationSet("glob.fdset", dataGroupTypes, true, 0, true);
+
+	grobAnimSet = new AnimationSet();
+	grobAnimSet->loadAnimationSet("grob.fdset", dataGroupTypes, true, 0, true);
+
+	wallAnimSet = new AnimationSet();
+	wallAnimSet->loadAnimationSet("wall.fdset", dataGroupTypes);
 
 	//build hero entity
 	hero = new Hero(heroAnimSet);
@@ -125,6 +129,7 @@ Game::~Game() {
 
 	delete heroAnimSet;
 	delete globAnimSet;
+	delete grobAnimSet;
 	delete wallAnimSet;
 
 	delete hero;
@@ -176,6 +181,7 @@ void Game::update() {
 						overlayTimer = 2;
 
 						Glob::globsKilled = 0;
+						Grob::grobsKilled = 0;
 						if (scoreTexture != NULL) {
 							cleanup(scoreTexture);
 							scoreTexture = NULL;
@@ -222,6 +228,17 @@ void Game::update() {
 
 			enemies.push_back(enemy);
 			Entity::entities.push_back(enemy);
+
+			// SPAWN GROB ENEMIES EVERY 5 ENEMIES SPAWNED
+			if (enemiesBuilt % 5 == 0) {
+				Grob *grob = new Grob(grobAnimSet);
+				grob->x = getRandomNumber(Globals::ScreenWidth - (2 * 32) - 32) + 32 + 16; // random x values between our walls
+				grob->y = getRandomNumber(Globals::ScreenHeight - (2 * 32) - 32) + 32 + 16; // random y values between our walls
+				grob->invincibleTimer = 0.01f;
+
+				enemies.push_back(grob);
+				Entity::entities.push_back(grob);
+			}
 		}
 
 		// Update camera positions
@@ -258,7 +275,7 @@ void Game::draw() {
 				SDL_Color color = {255, 255, 255, 255}; // white
 
 				stringstream ss;
-				ss << "Enemies dispatched: " << Glob::globsKilled;
+				ss << "Enemies dispatched: " << Glob::globsKilled + Grob::grobsKilled;
 
 				string resPath = getResourcePath();
 				scoreTexture = renderText(ss.str(), resPath+"vermin_vibes_1989.ttf", color, 30, Globals::renderer);
