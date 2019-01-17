@@ -19,6 +19,7 @@ public:
 	// abstract, up to other classes to decide how they die
 	virtual void die() = 0;
 	virtual void updateInvincibleTimer();
+	virtual void hitLanded(LivingEntity* entity) { ; }
 
 	// overriding entities draw
 	void draw();

@@ -22,6 +22,12 @@ Game::Game() {
 	SoundManager::soundManager.loadSound("dash", resPath + "dash.wav");
 	SoundManager::soundManager.loadSound("growl", resPath + "Randomize34.wav");
 	SoundManager::soundManager.loadSound("enemyDie", resPath + "Randomize41.wav");
+	// sounds for boss
+	SoundManager::soundManager.loadSound("crash", resPath + "crash.wav");
+	SoundManager::soundManager.loadSound("smash", resPath + "smash.wav");
+	SoundManager::soundManager.loadSound("shoot", resPath + "shoot2.wav");
+	SoundManager::soundManager.loadSound("laugh", resPath + "laugh2.wav");
+
 	// load Music
 	song = Mix_LoadMUS(string(resPath + "Fatal Theory.wav").c_str()); // song by Ryan Beveridgre https://soundcloud.com/ryan-beveridge
 	if (song != NULL) 
