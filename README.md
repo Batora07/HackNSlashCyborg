@@ -6,6 +6,10 @@ A hack' n slash game made in C++ with the SDL2 library.
 Made thanks to the assets and courses from Matthew Carr (https://twitter.com//2HitMatt)
 https://www.udemy.com/hack-n-slash-sdl2/learn/v4/overview
 
+UPDATES :
+  - Add a camera with interpolation that smoothly follows the player around the stage :
+  [![PLG02](cyborg_battle/img/cyborgBattleCameraMovement.gif)](cyborg_battle/img/cyborgBattleCameraMovement.gif)
+
 Credit:
 Course programming, curriculum design, and lectures: Matthew Carr
 
