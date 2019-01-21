@@ -2,7 +2,7 @@
 [![PLG01](cyborg_battle/img/gameOverview.gif)](cyborg_battle/img/gameOverview.gif)
 
 A hack' n slash game made in C++ with the SDL2 library.
-Executable project available here : <https://bit.ly/2MfIxS2>
+Game Installer available here : <https://bit.ly/2T1kvMV>
 (To compile the project, you need to have the sdl2 library located at C:\sdl2)
 Made thanks to the assets and courses from Matthew Carr (https://twitter.com//2HitMatt)
 https://www.udemy.com/hack-n-slash-sdl2/learn/v4/overview
